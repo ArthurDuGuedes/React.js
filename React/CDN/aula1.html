@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+
+        .container{
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        button{
+            margin: 5px;
+            padding: 10px;
+            border: 1px solid #ddd ;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .tarefa{
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        .concluida{
+            text-decoration: line-through;
+            color: rgb(2, 128, 2);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+        const { createRoot } = ReactDOM;
+
+        
+        function ListaDeTarefas(){
+            const [tarefas, setTarefas] = useState([])
+            const [novaTarefa, setNovaTarefa] = useState('')
+
+            function adicionarTarefa(){
+                const nova = {texto: novaTarefa, concluida: false}
+                setTarefas([...tarefas, nova])
+                setNovaTarefa('')
+            }
+
+            function removerTarefa(index){
+                const novasTarefas = [...tarefas]
+                novasTarefas.splice(index, 1)
+                setTarefas(novasTarefas)
+            }
+
+            function marcarTarefa(index) {
+                const novasTarefas = tarefas.map((tarefa, i) => 
+                i === index ? { ...tarefa, concluida: !tarefa.concluida } : tarefa
+                );
+                setTarefas(novasTarefas);
+            }
+            return (
+            <div>
+            <h2>Lista de Tarefas</h2>
+            <input
+                type="text"
+                placeholder="Nova tarefa"
+                value={novaTarefa}
+                onChange={(e) => setNovaTarefa(e.target.value)}
+            />
+            <button onClick={adicionarTarefa}>Adicionar</button>
+
+            <div>
+                {tarefas.map((tarefa, index) => (
+                <div key={index} className={`tarefa ${tarefa.concluida ? 'concluida' : ''}`}>
+                    <span>{tarefa.texto}</span>
+                    <div>
+                    <button onClick={() => marcarTarefa(index)}>
+                        {tarefa.concluida ? 'Desmarcar' : 'Concluir'}
+                    </button>
+                    <button onClick={() => removerTarefa(index)}>🗑️</button>
+                    </div>
+                </div>
+                ))}
+            </div>
+            </div>
+        )
+    }
+
+    const container = document.querySelector('.root')
+    const root = createRoot(container)
+    root.render(<ListaDeTarefas />)
+
+        function Contador(){
+            const [contador, setContador] = useState(0)
+            return(
+                <div>
+                    <h2>Contador</h2>
+                    <p>{contador}</p>
+                    <button onClick={() => setContador(contador + 1)} >Incrementar</button>
+                    <button onClick ={() => setContador(contador-1)} >Decrementar</button>
+                </div>
+            )
+        }
+
+        // const container = document.querySelector('.root');
+        // const root = createRoot(container);
+        // root.render(<Contador />);
+
+
+        function Saudacao({ nome = 'Fulano' }) {
+            return <h1>Olá, {nome}!</h1>;
+        }
+
+        // const container = document.querySelector('.root');
+        // const root = createRoot(container);
+        // root.render(<Saudacao />);
+    </script>
+</body>
+</html>
