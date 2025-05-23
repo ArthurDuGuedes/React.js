@@ -1,0 +1,33 @@
+img{
+    width: 300px  ;
+    height: 150px;
+}
+
+h1{
+    text-align: center;
+}
+
+body{
+    background-color: #000;
+    color: #fff;
+}
+
+.cardsContainer{
+   display: flex;
+   flex-wrap: wrap;
+   gap: 30px;
+   justify-content: center;
+}
+
+
+.comprar{
+    background-color: rgb(5, 105, 236);
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.comprar:hover{
+    background-color:rgba(5, 105, 236, 0.685);
+}

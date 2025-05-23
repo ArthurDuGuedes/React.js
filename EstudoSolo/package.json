@@ -1,0 +1,21 @@
+{
+  "name": "estudosolo",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "esbuild --bundle src/main.jsx --outfile=main.js --servedir=./ --watch",
+    "build": "esbuild --bundle src/main.jsx --outfile=main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/material": "^7.1.0",
+    "esbuild": "^0.25.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  }
+}

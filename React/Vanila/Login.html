@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .validacao{
+            color: red;
+            display: none ;
+        }
+    </style>
+</head>
+<body>
+    <form action="">
+        <label for="">Email</label>
+        <input id="email" type="email" placeholder="Email">
+        <label for="">Senha</label>
+        <input id="senha" type="password" placeholder="Senha">
+        <p class="validacao" >Senha contem menos de 6 caracteres</p>
+        <button id="login"> Login </button>
+    </form>
+</body>
+</html>
+<script>
+    
+    let users = [
+        {
+            email: "admin",
+            senha: "1234567"
+        }
+    ]
+    function Login(event){
+        event.preventDefault()
+        let email = document.getElementById('email').value
+        let senha = document.getElementById('senha').value
+        let validacao = document.querySelector('.validacao');
+
+
+        console.log(email)
+        console.log(senha)
+
+        if (senha.length < 6) {
+            validacao.style.display = "block";
+            return; 
+        } else {
+            validacao.style.display = "none";
+        }
+
+        if (users.find((user => user.email === email && user.senha === senha))){
+            console.log("logou")
+        }
+        else{
+            console.log('erro ao logar')
+        }
+    }
+
+    document.getElementById('login').addEventListener('click',Login)
+    
+</script>
